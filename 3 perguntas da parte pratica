@@ -1,0 +1,8 @@
+1. Qual a diferença entre nginx:alpine e o contêiner comunicado?
+R: nginx:alpine é a imagem base e contêiner  comunicado é o container em execução
+
+2. O que significa o mapeamento 8090:80?
+R:redirecionamento de portas
+
+3. Qual saída comprova que a página solicitada respondeu?
+R:curl http://localhost:8090
