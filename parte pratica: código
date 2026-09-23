@@ -1,0 +1,40 @@
+root@ubuntu:~$ cat > index.html <<'EOF'
+> <!DOCTYPE html>
+> <html lang="pt-BR">
+> <head>
+> <meta charset="UTF-8">
+> <title>Comunicado interno</title>
+> </head>
+> <h1>Comunicado interno disponivel</h1>
+> </body>
+> </html>
+> EOF
+root@ubuntu:~$ docker run -d --name comunicado -p 8090:80 nginx:alpine
+Unable to find image 'nginx:alpine' locally
+alpine: Pulling from library/nginx
+e2de96513ba9: Pull complete 
+d9aae54b5831: Pull complete 
+6c53d0b2a666: Pull complete 
+745dfb2690dd: Pull complete 
+9a9a644fdd6a: Pull complete 
+64c8194480fe: Pull complete 
+e76228b47809: Pull complete 
+e72112c14215: Pull complete 
+Digest: sha256:1ed1b0e1d7652937d6cbdaf4018c7b6fc009a7dd6c3047351e2eddda745de43f
+Status: Downloaded newer image for nginx:alpine
+1c24608de694049be2588023e629485e0e2cb67959b9817917eba122eb0394ae
+root@ubuntu:~$ docker cp index.html comunicado:/usr/share/nginx/html/index.html
+Successfully copied 2.05kB to comunicado:/usr/share/nginx/html/index.html
+root@ubuntu:~$ docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED              STATUS              PORTS                                     NAMES
+1c24608de694   nginx:alpine   "/docker-entrypoint.…"   About a minute ago   Up About a minute   0.0.0.0:8090->80/tcp, [::]:8090->80/tcp   comunicado
+root@ubuntu:~$ curl http://localhost:8090
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Comunicado interno</title>
+</head>
+<h1>Comunicado interno disponivel</h1>
+</body>
+</html>
